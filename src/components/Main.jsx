@@ -3,22 +3,23 @@ import React from "react";
 export default function Main() {
   const [ingredients, setIngredients] = React.useState([]);
 
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const newIngredient = formData.get("ingredient")?.toString() || "";
+  function submit(formData) {
+    const newIngredient = formData.get("ingredient");
     setIngredients((prevIngredients) => [...prevIngredients, newIngredient]);
   }
 
   const ingredientListItem = ingredients.map((ingredient) => (
-    <li key={ingredient} className="text-slate-600 mb-4">
+    <li key={ingredient} className="mb-2 text-slate-800">
       {ingredient}
     </li>
   ));
 
   return (
-    <main className="mx-8 mt-16 w-full">
-      <form onSubmit={handleSubmit} className="flex flex-wrap gap-4 mx-auto">
+    <main className="mx-8 mt-16 flex min-h-screen flex-col">
+      <form
+        action={submit}
+        className="mx-auto flex w-full flex-wrap justify-center gap-4"
+      >
         <input
           className="text-normal min-w-[300px] max-w-[500px] rounded border border-gray-400 px-3 py-2 shadow-sm sm:grow"
           type="text"
@@ -31,7 +32,11 @@ export default function Main() {
       </form>
 
       <div className="mt-6">
-        {ingredientListItem.length >= 1 ? <h2 className="mb-6 text-xl font-bold">Added Ingredients List</h2> : <p></p>}
+        {ingredientListItem.length >= 1 ? (
+          <h2 className="mb-6 text-xl font-bold">Added Ingredients List</h2>
+        ) : (
+          <p></p>
+        )}
         <ul className="list-outside list-disc pl-5">{ingredientListItem}</ul>
       </div>
     </main>
