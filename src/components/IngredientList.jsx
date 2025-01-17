@@ -1,15 +1,15 @@
 /* eslint-disable react/prop-types */
 export default function IngredientList(props) {
-  const ingredientListItem = props.ingredients.map((ingredient) => (
-    <li key={ingredient} className="mb-4 text-slate-800">
+  const ingredientListItem = props.ingredients.map((ingredient, index) => (
+    <li key={index} className="mb-4 text-slate-800">
       <div className="flex items-center gap-4">
         {ingredient}
-        {/* <button
-          onClick={() => props.removeIngredient(props.ingredients)}
+        <button
+          onClick={() => props.removeIngredient(index)}
           className="text-sm text-rose-500 underline"
         >
           Remove
-        </button> */}
+        </button>
       </div>
     </li>
   ));

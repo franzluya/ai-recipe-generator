@@ -6,7 +6,7 @@ An AI-powered recipe generator that creates recipes based on ingredients you hav
 
 - Add ingredients to your list
 - Generate recipes based on available ingredients
-- Markdown-formatted recipe output
+- Remove ingredients from your list with one click
 - Responsive design
 - Clean and intuitive UI
 

@@ -1,5 +1,3 @@
-import React from 'react'
-import {createRoot} from 'react-dom/client'
 import Markdown from 'react-markdown'
 
 export default function Recipe(props) {
@@ -12,7 +10,7 @@ export default function Recipe(props) {
     li: ({children}) => <li className="mb-2">{children}</li>,
   }
   return (
-    <section className="my-10 leading-8">
+    <section className="prose my-10 leading-8">
       <h2 className="mb-4 text-xl font-semibold">Chef AI recommends:</h2>
       <Markdown components={customComponents}>{props.recipe}</Markdown>
     </section>
