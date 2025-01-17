@@ -1,31 +1,29 @@
-
 import React from "react";
+import IngredientList from "./IngredientList";
 import Recipe from "./Recipe";
-import GetRecipe from "./GetRecipe";
+import { getRecipeFromMistral } from "../ai.js";
 
 export default function Main() {
   const [ingredients, setIngredients] = React.useState([]);
-  const [recipeShown, setRecipeShown] = React.useState(false);
-  function submit(formData) {
+  function addIngredient(formData) {
     const newIngredient = formData.get("ingredient");
     setIngredients((prevIngredients) => [...prevIngredients, newIngredient]);
   }
+  const [recipe, setRecipe] = React.useState("");
 
-  const showRecipe = () => setRecipeShown((prevShown) => !prevShown);
+  async function getRecipe() {
+    const recipeMarkdown = await getRecipeFromMistral(ingredients);
+    console.log(recipeMarkdown)
+    setRecipe(recipeMarkdown)
+  }
 
-  const ingredientListItem = ingredients.map((ingredient) => (
-    <li key={ingredient} className="mb-4 text-slate-800">
-      <div className="flex items-center gap-4">
-        {ingredient}
-        <button className="text-sm text-rose-500 underline">Remove</button>
-      </div>
-    </li>
-  ));
-
+  // function removeIngredient(id) {
+  //   setIngredients;
+  // }
   return (
     <main className="mx-12 mt-16 flex min-h-screen flex-col lg:mx-80">
       <form
-        action={submit}
+        action={addIngredient}
         className="mx-auto flex w-full flex-wrap justify-center gap-4"
       >
         <input
@@ -39,14 +37,15 @@ export default function Main() {
         </button>
       </form>
 
-      <section className="mt-6">
-        {ingredients.length > 0 && (
-          <h2 className="mb-6 text-xl font-bold">Added Ingredients:</h2>
-        )}
-        <ul className="list-outside list-disc pl-5">{ingredientListItem}</ul>
-        {ingredients.length > 3 && <GetRecipe handleClick={showRecipe} />}
-      </section>
-      {recipeShown && <Recipe />}
+      {ingredients.length > 0 && (
+        <IngredientList
+          ingredients={ingredients}
+          // removeIngredient={removeIngredient}
+          getRecipe={getRecipe}
+        />
+      )}
+
+      {recipe && <Recipe recipe={recipe} />}
     </main>
   );
 }
