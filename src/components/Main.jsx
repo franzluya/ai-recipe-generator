@@ -13,15 +13,15 @@ export default function Main() {
 
   async function getRecipe() {
     const recipeMarkdown = await getRecipeFromMistral(ingredients);
-    console.log(recipeMarkdown)
-    setRecipe(recipeMarkdown)
+    console.log(recipeMarkdown);
+    setRecipe(recipeMarkdown);
   }
 
   // function removeIngredient(id) {
   //   setIngredients;
   // }
   return (
-    <main className="mx-12 mt-16 flex min-h-screen flex-col lg:mx-80">
+    <main className="mx-8 mt-16 flex min-h-screen flex-col md:mx-24 xl:mx-80">
       <form
         action={addIngredient}
         className="mx-auto flex w-full flex-wrap justify-center gap-4"
