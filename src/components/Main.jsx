@@ -14,7 +14,6 @@ export default function Main() {
 
   async function getRecipe() {
     const recipeMarkdown = await getRecipeFromMistral(ingredients);
-    console.log(recipeMarkdown);
     setRecipe(recipeMarkdown);
   }
 
@@ -25,7 +24,7 @@ export default function Main() {
   }
 
   return (
-    <main className="mx-8 mt-16 flex  flex-col flex-grow md:mx-24 xl:mx-80">
+    <main className="mx-8 mt-16 flex flex-grow flex-col md:mx-24 xl:mx-80">
       <form
         action={addIngredient}
         className="mx-auto flex w-full flex-wrap justify-center gap-4"

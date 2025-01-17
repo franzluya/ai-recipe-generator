@@ -1,4 +1,5 @@
-/* eslint-disable no-undef */
+import typography from '@tailwindcss/typography';
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -12,5 +13,5 @@ export default {
       'serif': ['Merriweather', 'serif'],
     },
   },
-  plugins: [require('@tailwindcss/typography')],
+  plugins: [typography],
 }
