@@ -1,11 +1,14 @@
 import React from "react";
 import IngredientList from "./IngredientList";
 import Recipe from "./Recipe";
-
 import { getRecipeFromMistral } from "../ai.js";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 export default function Main() {
   const [ingredients, setIngredients] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
+
   function addIngredient(formData) {
     const newIngredient = formData.get("ingredient");
     setIngredients((prevIngredients) => [...prevIngredients, newIngredient]);
@@ -14,14 +17,17 @@ export default function Main() {
 
   React.useEffect(() => {
     if (recipe && recipeSection) {
-      recipeSection.current.scrollIntoView({behavior: "smooth"});
+      recipeSection.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [recipe]);
 
   const recipeSection = React.useRef(null);
+
   async function getRecipe() {
+    setLoading(true);
     const recipeMarkdown = await getRecipeFromMistral(ingredients);
     setRecipe(recipeMarkdown);
+    setLoading(false);
   }
 
   function removeIngredient(indexToRemove) {
@@ -56,8 +62,25 @@ export default function Main() {
           getRecipe={getRecipe}
         />
       )}
+      {loading ? (
+        <div>
+          <Skeleton
+            height={20}
+            width={200}
+            style={{ marginBottom: "16px", marginTop: "18px" }}
+          />
+          <Skeleton height={50} width={500} style={{ marginBottom: "16px" }} />
+          <Skeleton height={20} count={5} style={{ marginBottom: "12px" }} />
 
-      {recipe && <Recipe recipe={recipe} />}
+          <Skeleton height={30} style={{ marginTop: "12px" }} />
+
+          <Skeleton height={10} count={5} style={{ marginBottom: "12px" }} />
+          <Skeleton height={40} style={{ marginTop: "8px" }} />
+          <Skeleton height={10} count={5} style={{ marginBottom: "12px" }} />
+        </div>
+      ) : (
+        recipe && <Recipe recipe={recipe} />
+      )}
     </main>
   );
 }
