@@ -18,7 +18,7 @@ export default function IngredientList(props) {
       <h2 className="mb-6 text-xl font-bold">Added Ingredients:</h2>
       <ul className="list-outside list-disc pl-5">{ingredientListItem}</ul>
       {props.ingredients.length > 3 && (
-        <div className="mt-8 flex flex-wrap justify-between gap-4 rounded-md bg-gray-200 px-10 py-8 shadow">
+        <div ref={props.ref} className="mt-8 flex flex-wrap justify-between gap-4 rounded-md bg-gray-200 px-10 py-8 shadow">
           <div>
             <h3 className="text-xl font-bold">Ready for a recipe?</h3>
             <p className="text-sm text-gray-600">
