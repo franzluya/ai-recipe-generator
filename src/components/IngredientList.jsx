@@ -29,7 +29,7 @@ export default function IngredientList(props) {
             onClick={props.getRecipe}
             className="grow-0 rounded-md bg-slate-800 px-6 py-2 text-gray-50 shadow ease-in-out hover:bg-slate-600 hover:text-gray-100"
           >
-            Get a recipe
+            {props.isLoading ? "Generating..." : "Get a recipe"}
           </button>
         </div>
       )}

@@ -7,7 +7,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 export default function Main() {
   const [ingredients, setIngredients] = React.useState([]);
-  const [loading, setLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   function addIngredient(formData) {
     const newIngredient = formData.get("ingredient");
@@ -18,20 +18,19 @@ export default function Main() {
   const skeletonRef = React.useRef(null);
 
   React.useEffect(() => {
-    if (loading && skeletonRef.current) {
+    if (isLoading && skeletonRef.current) {
       skeletonRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
+        behavior: "smooth"
       });
     }
-  }, [loading]);
+  }, [isLoading]);
 
 
   async function getRecipe() {
-    setLoading(true);
+    setIsLoading(true);
     const recipeMarkdown = await getRecipeFromMistral(ingredients);
     setRecipe(recipeMarkdown);
-    setLoading(false);
+    setIsLoading(false);
   }
 
   function removeIngredient(indexToRemove) {
@@ -60,12 +59,13 @@ export default function Main() {
 
       {ingredients.length > 0 && (
         <IngredientList
+          isLoading={isLoading}
           ingredients={ingredients}
           removeIngredient={removeIngredient}
           getRecipe={getRecipe}
         />
       )}
-      {loading ? (
+      {isLoading ? (
         <div ref={skeletonRef}>
           <Skeleton
             height={20}
