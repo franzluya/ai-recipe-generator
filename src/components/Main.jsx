@@ -15,13 +15,17 @@ export default function Main() {
   }
   const [recipe, setRecipe] = React.useState("");
 
-  React.useEffect(() => {
-    if (recipe && recipeSection) {
-      recipeSection.current.scrollIntoView({ behavior: "smooth" });
-    }
-  }, [recipe]);
+  const skeletonRef = React.useRef(null);
 
-  const recipeSection = React.useRef(null);
+  React.useEffect(() => {
+    if (loading && skeletonRef.current) {
+      skeletonRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }, [loading]);
+
 
   async function getRecipe() {
     setLoading(true);
@@ -56,14 +60,13 @@ export default function Main() {
 
       {ingredients.length > 0 && (
         <IngredientList
-          ref={recipeSection}
           ingredients={ingredients}
           removeIngredient={removeIngredient}
           getRecipe={getRecipe}
         />
       )}
       {loading ? (
-        <div>
+        <div ref={skeletonRef}>
           <Skeleton
             height={20}
             width={200}
