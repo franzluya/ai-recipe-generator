@@ -13,12 +13,19 @@ export default function IngredientList(props) {
       </div>
     </li>
   ));
-  return (
+  return props.ingredients.length === 0 ? (
+    <h2 className="mt-10 border border-slate-700 p-6 rounded-lg text-center text-lg text-slate-500">
+      Add at least 4 ingredients to generate a recipe
+    </h2>
+  ) : (
     <section className="mt-6">
       <h2 className="mb-6 text-xl font-bold">Added Ingredients:</h2>
       <ul className="list-outside list-disc pl-5">{ingredientListItem}</ul>
       {props.ingredients.length > 3 && (
-        <div className="mt-8 flex flex-wrap justify-between gap-4 rounded-md bg-gray-200 px-10 py-8 shadow">
+        <div
+          ref={props.ref}
+          className="mt-8 flex flex-wrap justify-between gap-4 rounded-md bg-gray-200 px-10 py-8 shadow"
+        >
           <div>
             <h3 className="text-xl font-bold">Ready for a recipe?</h3>
             <p className="text-sm text-gray-600">
