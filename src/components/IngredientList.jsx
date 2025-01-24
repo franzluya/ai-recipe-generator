@@ -14,7 +14,7 @@ export default function IngredientList(props) {
     </li>
   ));
   return props.ingredients.length === 0 ? (
-    <h2 className="mt-10 border border-slate-700 p-6 rounded-lg text-center text-lg text-slate-500">
+    <h2 className="mt-10 border border-slate-300 px-6 py-24 rounded-lg text-center text-lg text-slate-400">
       Add at least 4 ingredients to generate a recipe
     </h2>
   ) : (
