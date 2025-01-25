@@ -71,7 +71,7 @@ export default function Main() {
             width={200}
             style={{ marginBottom: "16px", marginTop: "18px" }}
           />
-          <Skeleton height={50} width={500} style={{ marginBottom: "16px" }} />
+          <Skeleton height={50} width={300} style={{ marginBottom: "16px" }} />
           <Skeleton height={20} count={5} style={{ marginBottom: "12px" }} />
 
           <Skeleton height={30} style={{ marginTop: "12px" }} />
